@@ -18,10 +18,17 @@ h1{
 	margin: 0px;
 }
 
+.div-geral{
+	width: 100%;
+	height: 100%;
+}
+
 .div-titulo{
 	margin: 0px;
 	width: 100%;
-	height: 100px;
+	height: 20%;
+	padding-top: 12px;
+	padding-bottom: 18px;
 	background-color: #E75C5C
 }
 
