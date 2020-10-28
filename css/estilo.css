@@ -5,7 +5,7 @@ body{
 }
 
 p{
-	text-align: justify;
+	text-align: center;
 	text-indent: 45px;
 }
 
@@ -81,4 +81,15 @@ h1{
 	height: 135px;
 	padding-top: 50px;
 	text-align: center;
+}
+
+
+.div-video-produtos{
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	margin-top: 70px;
+	margin-right: 30px;
+	margin-left:30px;
+	margin-bottom: 70px;
 }
