@@ -1,0 +1,88 @@
+body{
+	margin: 0px;
+	background-color: #C7E5EE;
+	font-family: Helvetica;
+}
+
+span{
+	height: 100%;
+	width: 100%;
+}
+
+.div-geral{
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+}
+
+.centralizar-texto{
+	text-align: center;
+}
+
+.div-titulo-inicial{
+	background-image:;
+	height: 120px;
+	width: 100%;
+}
+
+.tabela-titulo-inicial{
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	background-image: radial-gradient(circle, #42C7A2, #7AD7BD);
+}
+
+.tr-tamanho{
+	width: 20%;
+}
+
+.div-logo{
+	height: 100%;
+	width: 100%;
+}
+
+.div-menu-opcoes{
+	background-color: #6DC180;
+	border: 2px solid #498155;
+	border-radius: 5px;
+}
+
+.div-menu-opcoes button{
+	height: 100%;
+	width: 100%;
+	background-color: inherit;
+	border: none;
+	font-size: 32;
+	cursor: pointer;
+}
+
+.div-menu-opcoes:hover{
+	background-color: #7AD78F;
+}
+
+.div-meio-pagina{
+	width: 100%;
+	height: 500px;
+}
+
+.div-meio-pagina table{
+	height: 100%;
+	width: 100%;
+}
+
+.b-cadastro{
+	background-color: #9DCD8A;
+	border: 2px solid #5D874C;
+	border-radius: 2px;
+	font-size: 25px;
+	padding: 10px;
+}
+
+.b-cadastro:hover{
+	cursor: pointer;
+	background-color: #85C16D;
+}
+
+.b-cadastro:active{
+	background-color: #C1DFB5;
+}
