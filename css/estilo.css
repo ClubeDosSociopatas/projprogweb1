@@ -1,6 +1,6 @@
 body{
 	margin: 0px;
-	background-color: #C7E5EE;
+	background-color: #FFE6E6;
 	font-family: Helvetica;
 }
 
@@ -15,25 +15,52 @@ span{
 	margin: 0px;
 }
 
+.div-texto-topo{
+	position: relative;
+	z-index: 10;
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	background-color: #000000;
+	color: white;
+	box-shadow: 0px 0px 7px #000000;
+}
+
+.texto-topo-pagina{
+	position: relative;
+	top: 6px;
+	height: 100%;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .centralizar-texto{
 	text-align: center;
 }
 
 .div-titulo-inicial{
-	background-image:;
+	position: relative;
+	z-index: 9;
 	height: 120px;
 	width: 100%;
+	background-color: #AB183D;
+	box-shadow: 0px 0px 7px #000000;
 }
 
 .tabela-titulo-inicial{
 	height: 100%;
 	width: 100%;
 	text-align: center;
-	background-image: radial-gradient(circle, #42C7A2, #7AD7BD);
 }
 
 .tr-tamanho{
 	width: 20%;
+}
+
+.tr-tamanho img{
+	height: 120px;
 }
 
 .div-logo{
@@ -41,23 +68,26 @@ span{
 	width: 100%;
 }
 
-.div-menu-opcoes{
-	background-color: #6DC180;
-	border: 2px solid #498155;
-	border-radius: 5px;
-}
-
-.div-menu-opcoes button{
+.b-menu-opcoes{
 	height: 100%;
 	width: 100%;
-	background-color: inherit;
+	background-color: #AB183D;
+	border-radius: 20px;
 	border: none;
 	font-size: 32;
 	cursor: pointer;
+	outline: none;
 }
 
-.div-menu-opcoes:hover{
-	background-color: #7AD78F;
+.b-menu-opcoes:hover{
+	position: relative;
+	position: 2;
+	background-color: #d43c53;
+	box-shadow: 0px 0px 8px #d43c53;
+}
+
+.b-menu-opcoes:active{
+	background-color: #C15872;
 }
 
 .div-meio-pagina{
@@ -71,18 +101,28 @@ span{
 }
 
 .b-cadastro{
-	background-color: #9DCD8A;
-	border: 2px solid #5D874C;
-	border-radius: 2px;
+	z-index: 2;
+	position: relative;
+	background-color: #A4587A;
+	border-radius: 0px;
+	border: none;
 	font-size: 25px;
 	padding: 10px;
+	outline: none;
+	box-shadow: 0px 0px 1px #000000;
+}
+
+.mensagem-cativante{
+	text-shadow: 1px 1px 0px #FFFFFF;
 }
 
 .b-cadastro:hover{
+	transition: 0.15s;
 	cursor: pointer;
-	background-color: #85C16D;
+	background-color: #B08A9B;
+	box-shadow: 0px 0px 2px #000000;
 }
 
 .b-cadastro:active{
-	background-color: #C1DFB5;
+	background-color: #834661;
 }
