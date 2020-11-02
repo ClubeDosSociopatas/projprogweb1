@@ -18,6 +18,11 @@ h1{
 	margin: 0px;
 }
 
+h3{
+	color: #E75C5C;
+	text-align: center;
+}
+
 <style type="text/css">
 input{
   height: 30px;
@@ -137,4 +142,21 @@ input{
 
 .div-area-opinioes{
 	background-color: #e5e5e5;
+}
+
+.div-area-contatcao{
+	margin: 0px;
+}
+
+.div-contatacao{
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.div-rodape{
+	height: 50px;
+	width: 100%;
+	background-color: #e75c5c;
+	float: left;
+	margin:0px;
 }
