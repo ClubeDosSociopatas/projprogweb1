@@ -63,6 +63,52 @@ span{
 	height: 120px;
 }
 
+.b-icones{
+	height: 35px;
+	background-color: transparent;
+	color: transparent;
+	outline: none;
+	border: none;
+	transition: 0.1s;
+	transition-property: height;
+	position: relative;
+}
+
+.b-icones img{
+	height: 100%;
+}
+
+.pipi{
+	visibility: hidden;
+	position: absolute;
+	left: 60%;
+	top: 38%;
+	width: 22%;
+}
+
+.pipi input{
+	position: absolute;
+	left: 100%;
+	width: 0%;
+	border: none;
+	outline: none;
+	border-radius: 0px;
+	font-size: 25px;
+	transition: 1s;
+	transition-property: left,width;
+}
+
+.pipi input:focus{
+	position: absolute;
+	left: 0%;
+	width: 100%;
+}
+
+.b-icones:hover{
+	height: 42px;
+	cursor: pointer;
+}
+
 .div-logo{
 	height: 100%;
 	width: 100%;
