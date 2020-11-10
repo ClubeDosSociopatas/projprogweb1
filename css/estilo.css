@@ -44,19 +44,20 @@ input{
 }
 
 .div-produtos{
-	width: 100%;
 	display: flex;
 	justify-content: center;
 }
 
 .div-fotos-produtos{
 	float: left;
-	width: 200px;
-	height: 200px;
+	display: flex;
+	justify-content: center;
+	width: 70px;
+	height: 100%;
 	background-color: #CCC;
 	margin-top: 70px;
-	margin-right: 30px;
-	margin-left:30px;
+	margin-right: 120px;
+	margin-left:120px;
 	margin-bottom: 70px;
 	padding: 5px;
 }
@@ -154,9 +155,24 @@ input{
 }
 
 .div-rodape{
-	height: 50px;
+	height: 100%;
 	width: 100%;
 	background-color: #e75c5c;
 	float: left;
 	margin:0px;
+	display: flex;
+	justify-content: center;
+}
+
+.div-rodape-redes{
+	float: left;
+	display: flex;
+	justify-content: center;
+	width: 70px;
+	height: 100%;
+	margin-top: 50px;
+	margin-right: 100px;
+	margin-left:100px;
+	margin-bottom: 50px;
+	padding: 5px;
 }
