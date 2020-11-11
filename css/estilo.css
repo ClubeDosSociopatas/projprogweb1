@@ -4,11 +4,24 @@ body{
 	font-family: Helvetica;
 }
 
-span{
-	height: 100%;
-	width: 100%;
+a{
+	color: #21B6FF;
+	cursor: pointer;
 }
 
+a:hover{
+	color: #CC1A1A;
+	border-bottom: solid 1px #CC1A1A;
+}
+
+a:active{
+	color: #177FB2;
+	border-bottom: solid 1px #177FB2;
+}
+
+
+
+/*PRIMEIRO SEGMENTO*/
 .div-geral{
 	height: 100%;
 	width: 100%;
@@ -171,4 +184,86 @@ span{
 
 .b-cadastro:active{
 	background-color: #834661;
+}
+
+
+
+/*TELA DE LOGIN*/
+.div-cadastro{
+	top: 24%;
+	width: 480px;
+	height: 325px;
+	position: relative;
+	background-color: pink;
+	border: solid 1px;
+	border-radius: none;
+	box-shadow: 1px 1px 2px #000000;
+	margin: auto;
+}
+
+.table-cadastro{
+	width: 100%;
+	margin: 12px;
+}
+
+.table-cadastro input{
+	width: calc(100% - 24px);
+	height: 62px;
+	font-size: 32;
+	margin-top: 15px;
+	margin-bottom: 8px;
+	outline: none;
+	border: solid 0px;
+	border-radius: 0px;
+	transition: 0.2s;
+	transition-property: border-bottom;
+}
+
+.table-cadastro input::placeholder{
+	bottom: 6%;
+	z-index: 2;
+	position: relative;
+	font-size: 20;
+	padding: 10px;
+	transition: 0.2s;
+	transition-property: bottom;
+}
+
+.table-cadastro input:focus{
+	transition: 0.2s;
+	border-bottom: solid 3px;
+}
+
+.table-cadastro input:focus::placeholder{
+	transition: 0.2s;
+	bottom: 80%;
+	border-bottom: solid 3px;
+	border: none;
+}
+
+.table-cadastro button{
+	width: calc(100% - 24px);
+	height: 62px;
+	font-size: 45;
+	border: none;
+	border-radius: 0px;
+	outline: none;
+	cursor: pointer;
+	margin-top: 22px;
+	background-color: #a94646;
+	color: white;
+	box-shadow: 1px 1px 3px #000000;
+}
+
+.table-cadastro button:hover{
+	background-color: #bf5151;
+}
+
+.table-cadastro button:active{
+	background-color: #853f3f;
+}
+
+.alinhar-texto-direita{
+	text-align: center;
+	color: red;
 }
