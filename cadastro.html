@@ -1,6 +1,8 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/estilo.css">
+		<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+		<script type="text/javascript" src="js/funcoes.js"></script>
 
 	</head>
 
@@ -14,7 +16,7 @@
 				<table class="tabela-titulo-inicial">
 					<tr>
 						<td class="tr-tamanho"><div class="div-logo">
-								<img src="img/logo.png" class="tr-tamanho-logo">
+								<img src="img/logo.png" id="bRediPagPrincipal">
 							</div></td>
 						<td></td>
 						<td class="tr-tamanho"><div>
@@ -48,7 +50,7 @@
 						<td colspan="2"><input type="password" placeholder="Confirmar Senha"></td>
 					</tr>
 					<tr>
-						<td>Já possui conta? <a>Logue aqui!</a></td>
+						<td id="bRediLogin">Já possui conta? <a>Logue aqui!</a></td>
 						<td class="alinhar-texto-direita"></td>
 					</tr>
 					<tr>

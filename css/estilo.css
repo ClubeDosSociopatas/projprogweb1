@@ -74,6 +74,7 @@ a:active{
 
 .tr-tamanho img{
 	height: 120px;
+	cursor: pointer;
 }
 
 .b-icones{
