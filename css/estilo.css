@@ -279,4 +279,13 @@ a:active{
 .alinhar-texto-direita{
 	text-align: center;
 	color: red;
+	font-size: 14px;
+}
+
+.erro-cadastro{
+	border: solid red 1px !important;
+}
+
+.erro-cadastro::placeholder{
+	color: red;
 }
