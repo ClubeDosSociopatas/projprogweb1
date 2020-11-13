@@ -1,16 +1,44 @@
 ls = window.localStorage;
 url = window.location.href;
 
+//Itens localStorage//
 var contas = JSON.parse(ls.getItem("contas"));
 if(contas == null){
 	contas = [];
 }
-var user = parseInt(JSON.parse(ls.getItem("user")));
+var user = JSON.parse(ls.getItem("user"));
+
+var car = parseInt(JSON.parse(ls.getItem("carrinho")));
+
+//Teste usuario logado//
+var testePag = window.location.href.slice(window.location.href.lastIndexOf("/")+1)
+if(user != null && (testePag == "cadastro.html" || testePag == "login.html")){
+	window.location.href = "index.html";
+}
 
 
 $(document).ready(function(){
+	prepararPagina();
 	funcaoClique();
 });
+
+
+function prepararPagina(){
+	if(user != null){
+		usu = parseInt(user);
+		var capt = contas[usu][0].charAt(0).toUpperCase() + contas[usu][0].slice(1);
+		$("#meioPagIndex").html('<h1 class="mensagem-cativante">Seja bem vindo,<br>'+ capt +'!</h1>');
+		$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="img/iconeBusca.png"></button>');
+		$("#dIcones").append('<button class="b-icones"><img src="img/iconeCarrinho.png"></button>');
+		$("#dIcones").append('<button class="b-icones"><img src="img/iconePessoa.png"></button>');
+	}
+	else{
+		$("#fraseCati").html("Busque o seu Físico Perfeito,<br>Junte-se a Nós!");
+		$("#meioPagIndex").html('<button class="b-cadastro" id="bRediCadastro">Cadastro</button>')
+		$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="img/iconeBusca.png"></button>');
+		$("#dIcones").append('<button class="b-icones" id="bRediLogin"><img src="img/iconeLogin.png"></button>');
+	}
+}
 
 
 function funcaoClique(){
@@ -60,7 +88,7 @@ function funcaoClique(){
 				$("#textoErro").html("CONFIRMAÇÃO INCORRETA!");
 			}
 		}
-		
+
 		for(var cont = 0; cont < contas.length; cont++){
 			if(aux[0] == 1){
 				if($("#textoErro").val() == ""){
@@ -72,6 +100,8 @@ function funcaoClique(){
 		if(testeCadastro){
 			contas.push(aux);
 			ls.setItem("contas", JSON.stringify(contas));
+			ls.setItem("user", JSON.stringify(contas.length-1));
+			window.location.href = "index.html";
 		}
 	});
 	$("#bLogin").click(function(){
