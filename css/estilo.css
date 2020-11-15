@@ -92,32 +92,6 @@ a:active{
 	height: 100%;
 }
 
-.inp-busca{
-	visibility: hidden;
-	position: absolute;
-	left: 60%;
-	top: 38%;
-	width: 22%;
-}
-
-.inp-busca input{
-	position: absolute;
-	left: 100%;
-	width: 0%;
-	border: none;
-	outline: none;
-	border-radius: 0px;
-	font-size: 25px;
-	transition: 1s;
-	transition-property: left,width;
-}
-
-.inp-busca input:focus{
-	position: absolute;
-	left: 0%;
-	width: 100%;
-}
-
 .b-icones:hover{
 	height: 42px;
 	cursor: pointer;

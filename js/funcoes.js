@@ -13,7 +13,7 @@ var car = parseInt(JSON.parse(ls.getItem("carrinho")));
 //Teste usuario logado//
 var testePag = window.location.href.slice(window.location.href.lastIndexOf("/")+1)
 if(user != null && (testePag == "cadastro.html" || testePag == "login.html")){
-	window.location.href = "index.html";
+	window.location.href = "../index.html";
 }
 
 
@@ -30,13 +30,18 @@ function prepararPagina(){
 		$("#meioPagIndex").html('<h1 class="mensagem-cativante">Seja bem vindo,<br>'+ capt +'!</h1>');
 		$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="img/iconeBusca.png"></button>');
 		$("#dIcones").append('<button class="b-icones"><img src="img/iconeCarrinho.png"></button>');
-		$("#dIcones").append('<button class="b-icones"><img src="img/iconePessoa.png"></button>');
+		$("#dIcones").append('<button class="b-icones" id="bUser"><img src="img/iconePessoa.png"></button>');
 	}
 	else{
-		$("#fraseCati").html("Busque o seu Físico Perfeito,<br>Junte-se a Nós!");
-		$("#meioPagIndex").html('<button class="b-cadastro" id="bRediCadastro">Cadastro</button>')
-		$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="img/iconeBusca.png"></button>');
-		$("#dIcones").append('<button class="b-icones" id="bRediLogin"><img src="img/iconeLogin.png"></button>');
+		if(testePag == "cadastro.html" || testePag == "login.html"){
+			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
+		}
+		else{
+			$("#fraseCati").html("Busque o seu Físico Perfeito,<br>Junte-se a Nós!");
+			$("#meioPagIndex").html('<button class="b-cadastro" id="bRediCadastro">Cadastro</button>');
+			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="img/iconeBusca.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bRediLogin"><img src="img/iconeLogin.png"></button>');
+		}
 	}
 }
 
@@ -44,13 +49,25 @@ function prepararPagina(){
 function funcaoClique(){
 	//REDIRECIONAR//
 	$("#bRediCadastro").click(function(){
-		window.location.href = "cadastro.html";
+		if(testePag == "login.html"){
+			window.location.href = "cadastro.html";
+		}
+		else{
+			window.location.href = "paginas/cadastro.html";
+		}
 	});
 	$("#bRediLogin").click(function(){
-		window.location.href = "login.html";
+		if(testePag == "cadastro.html"){
+			window.location.href = "login.html";
+		}
+		else{
+			window.location.href = "paginas/login.html";
+		}
 	});
 	$("#bRediPagPrincipal").click(function(){
-		window.location.href = "index.html";
+		if(testePag == "cadastro.html" || testePag == "login.html"){
+			window.location.href = "../index.html";
+		}
 	});
 
 
@@ -101,7 +118,7 @@ function funcaoClique(){
 			contas.push(aux);
 			ls.setItem("contas", JSON.stringify(contas));
 			ls.setItem("user", JSON.stringify(contas.length-1));
-			window.location.href = "index.html";
+			window.location.href = "../index.html";
 		}
 	});
 	$("#bLogin").click(function(){
@@ -127,7 +144,7 @@ function funcaoClique(){
 		for(var cont = 0; cont < contas.length; cont++){
 			if(aux[0] == contas[cont][0] && aux[1] == contas[cont][3]){
 				ls.setItem("user", JSON.stringify(cont));
-				window.location.href = "index.html";
+				window.location.href = "../index.html";
 				break;
 			}
 			if(cont == (contas.length - 1)){
@@ -141,4 +158,7 @@ function funcaoClique(){
 			}
 		}
 	});
+
+
+
 }
