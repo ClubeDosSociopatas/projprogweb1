@@ -42,6 +42,15 @@ function prepararUsuario(){
 	$("#dataUser").html(contas[user][2]);
 	$("#estadoUser").html(contas[user][3]);
 	$("#senhaUser").html('*'.repeat(contas[user][4].length));
+	for(var cont = 0; cont < 3; cont++){
+		var cardTest = "#tCartaoCadastrado" + String(cont);
+		if(cartoes[user][cont][0] == null){
+			$(cardTest).html('Cadastrar cartão');
+		}
+		else{
+			$(cardTest).html((cartoes[user][cont][1].slice(0,4) + "-****".repeat(3)));
+		}
+	}
 }
 
 
@@ -73,6 +82,120 @@ function prepararPagina(){
 			$("#dIcones").append('<button class="b-icones" id="bRediLogin"><img src="img/iconeLogin.png"></button>');
 		}
 	}
+}
+
+
+
+function cadastrarCartao(num){
+	var juncao = '<div class="div-mudar-senha alturaJCartao" id="dCampoJanela"><table>';
+	juncao+=	 '<tr>';
+	juncao+=	 '<td class="fechar-janela"><img src="../img/iconeX.png" id="bFechaJanela"></td></tr>';
+	juncao+=	 '<tr>';
+	juncao+=	 '<td>Nome Completo: <input type="text" placeholder="Nome Completo" id="iNomeComp"></td></tr>';
+	juncao+=	 '<tr>';
+	juncao+=	 '<td>Número do Cartão: <input type="text" placeholder="Número do Cartão" maxlength="16" id="iNumCartao"></td></tr>';
+	juncao+=	 '<tr>';
+	juncao+=	 '<td>Código de Segurança: <input type="text" placeholder="CVV" maxlength="4" size="2" id="iCVV"></td></tr>';
+	juncao+=	 '<tr>';
+	juncao+=	 '<td>Data de Vencimento: <input type="text" placeholder="MM/AA" maxlength="5" size="3" id="iDataVenc"></td></tr>';
+	juncao+=	 '<tr><td><button class="b-janela" id="bJanelaOverCartao">CADASTRAR</button></td></tr>';
+	juncao+=	 '<tr><td class="erro-janela" id="tErroJanela"></td></tr>';
+	juncao+=	 '</table></div>';
+
+	$("#dOverlay").html(juncao);
+	$("#dCampoJanela").addClass("alturaJCartao");
+	$("#dOverlay").show();
+
+	$("#bFechaJanela").click(function(){
+		$("#dOverlay").hide();
+		$("#dOverlay").html();
+	});
+
+	$("#bJanelaOverCartao").click(function(){
+		var form = ["#iNomeComp", "#iNumCartao", "#iCVV", "#iDataVenc"];
+
+		var testeCartao = true;
+
+		for(var cont = 0; cont < form.length; cont++){
+			$(form[cont]).removeClass("input-janela-erro");
+		}
+		$("#tErroJanela").html("");
+
+		var aux = [];
+		for(var cont = 0; cont < form.length; cont++){
+			aux.push($(form[cont]).val());
+		}
+
+		for(var cont = 0; cont < form.length; cont++){
+			if(aux[cont] == ""){
+				testeCartao = false;
+				$(form[cont]).addClass("input-janela-erro");
+				$("#tErroJanela").html("FORMULARIO INCOMPLETO!");
+			}
+		}
+
+		if(parseInt(aux[1]) < 1000000000000000){
+			testeCartao = false;
+			$(form[1]).addClass("input-janela-erro");
+			if($("#tErroJanela").html() == ""){
+				$("#tErroJanela").html("CARTÃO INVÁLIDO!");
+			}
+		}
+
+		if(parseInt(aux[2]) < 100){
+			testeCartao = false;
+			$(form[2]).addClass("input-janela-erro");
+			if($("#tErroJanela").html() == ""){
+				$("#tErroJanela").html("CVV INVÁLIDO!");
+			}
+		}
+
+		if(testeCartao){
+			cartoes[user][num] = aux;
+			ls.setItem("cartoes", JSON.stringify(cartoes));
+			window.location.href = "usuario.html";
+		}
+	});
+}
+
+
+
+function prepararCartoes(num){
+	var juncao = '<div class="div-mudar-senha" id="dCampoJanela"><table><tr>';
+	juncao+=	 '<td class="fechar-janela" colspan="2"><img src="../img/iconeX.png" id="bFechaJanela"></td></tr>';
+	juncao+=	 '<tr>';
+	juncao+=	 '<td colspan="2" class="informacoes-cinza">Nome Completo: <span class="info">'+cartoes[user][num][0]+'</span></td></tr>';
+	juncao+=	 '<tr>';
+	juncao+=	 '<td colspan="2" class="informacoes-cinza">Número do Cartão: <span class="info">'+(cartoes[user][num][1].slice(0,4) + "-****".repeat(3))+'</span></td></tr>';
+	juncao+=	 '<tr>';
+	juncao+=	 '<td colspan="2" class="informacoes-cinza">Código de Segurança: <span class="info">'+cartoes[user][num][2]+'</span></td></tr>';
+	juncao+=	 '<tr>';
+	juncao+=	 '<td colspan="2" class="informacoes-cinza">Data de Vencimento: <span class="info">'+cartoes[user][num][3]+'</span></td></tr>';
+	juncao+=	 '<tr>';
+	juncao+=	 '<td><button class="b-janela" id="bCartaoRemover">REMOVER</button></td>';
+	juncao+=	 '<td><button class="b-janela" id="bCartaoMudar">MUDAR</button></td>';
+	juncao+=	 '</tr></table></div>';
+
+	cartao = '#tCartaoCadastrado' + String(num);
+
+	$("#dOverlay").html(juncao);
+	$("#dCampoJanela").addClass("alturaJMudar");
+	$("#dOverlay").show();
+
+	$("#bFechaJanela").click(function(){
+		$("#dOverlay").hide();
+		$("#dOverlay").html();
+	});
+	$("#bCartaoRemover").click(function(){
+		cartoes[user][num] = [null,null,null,null];
+		ls.setItem("cartoes", JSON.stringify(cartoes));
+		window.location.href = "usuario.html";
+	});
+	$("#bCartaoMudar").click(function(){
+		$("#dOverlay").hide();
+		$("#dOverlay").html();
+		cadastrarCartao(num);
+	});
 }
 
 
@@ -159,7 +282,7 @@ function funcaoClique(){
 		if(testeCadastro){
 			aux.splice(5);
 			contas.push(aux);
-			cartoes.push([,,,]);
+			cartoes.push([[null,null,null,null],[null,null,null,null],[null,null,null,null]]);
 			ls.setItem("contas", JSON.stringify(contas));
 			ls.setItem("user", JSON.stringify(contas.length-1));
 			ls.setItem("cartoes", JSON.stringify(cartoes));
@@ -212,6 +335,30 @@ function funcaoClique(){
 		ls.setItem("user", null);
 		window.location.href = "../index.html";
 	});
+	$("#tCartaoCadastrado0").click(function(){
+		if(cartoes[user][0][0] != null){
+			prepararCartoes(0);
+		}
+		else{
+			cadastrarCartao(0)
+		}
+	});
+	$("#tCartaoCadastrado1").click(function(){
+		if(cartoes[user][1][0] != null){
+			prepararCartoes(1);
+		}
+		else{
+			cadastrarCartao(1)
+		}
+	});
+	$("#tCartaoCadastrado2").click(function(){
+		if(cartoes[user][2][0] != null){
+			prepararCartoes(2);
+		}
+		else{
+			cadastrarCartao(2)
+		}
+	});
 	//CONFIRMAR DELETAR CONTA//
 	$("#bDeleteConta").click(function(){
 		var juncao = '<div class="div-mudar-senha" id="dCampoJanela">';
@@ -225,6 +372,7 @@ function funcaoClique(){
 		juncao+=	 '</tr>';
 		juncao+=	 '</table>';
 		juncao+=	 '</div>';
+
 		$("#dOverlay").html(juncao);
 		$("#dCampoJanela").addClass("alturaJDeletar");
 		$("#dOverlay").show();
@@ -266,6 +414,7 @@ function funcaoClique(){
 		juncao+=	 '</tr>';
 		juncao+=	 '</table>';
 		juncao+=     '</div>';
+
 		$("#dOverlay").html(juncao);
 		$("#dCampoJanela").addClass("alturaJMudar");
 		$("#dOverlay").show();
@@ -277,7 +426,7 @@ function funcaoClique(){
 		$("#bJanelaOver").click(function(){
 			var form = ["#iSenhaAtual", "#iNovaSenha", "#iConfSenha"];
 
-			var teste = true;
+			var testeSenha = true;
 
 			for(var cont = 0; cont < 3; cont++){
 				$(form[cont]).removeClass("input-janela-erro");
@@ -292,14 +441,14 @@ function funcaoClique(){
 
 			for(var cont = 0; cont < 3; cont++){
 				if(aux[cont] == ""){
-					teste = false;
+					testeSenha = false;
 					$(form[cont]).addClass("input-janela-erro");
 					$("#tErroJanela").html("FORMULARIO INCOMPLETO!");
 				}
 			}
 
 			if(aux[0] != contas[user][4]){
-				teste = false;
+				testeSenha = false;
 				$(form[0]).addClass("input-janela-erro");
 				if($("#tErroJanela").html() == ""){
 					$("#tErroJanela").html("SENHA INCORRETA!");
@@ -307,14 +456,14 @@ function funcaoClique(){
 			}
 
 			if(aux[1] != aux[2]){
-				teste = false;
+				testeSenha = false;
 				$(form[2]).addClass("input-janela-erro");
 				if($("#tErroJanela").html() == ""){
 					$("#tErroJanela").html("CONFIRMAÇÃO INCORRETA!");
 				}
 			}
 
-			if(teste){
+			if(testeSenha){
 				contas[user][4] = aux[1];
 				ls.setItem("contas", JSON.stringify(contas));
 				window.location.href = 'usuario.html';
