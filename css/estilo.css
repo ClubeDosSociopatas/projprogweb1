@@ -87,11 +87,9 @@ a:active{
 	transition-property: height;
 	position: relative;
 }
-
 .b-icones img{
 	height: 100%;
 }
-
 .b-icones:hover{
 	height: 42px;
 	cursor: pointer;
@@ -112,14 +110,12 @@ a:active{
 	cursor: pointer;
 	outline: none;
 }
-
 .b-menu-opcoes:hover{
 	position: relative;
 	position: 2;
 	background-color: #d43c53;
 	box-shadow: 0px 0px 8px #d43c53;
 }
-
 .b-menu-opcoes:active{
 	background-color: #C15872;
 }
@@ -145,20 +141,18 @@ a:active{
 	outline: none;
 	box-shadow: 0px 0px 1px #000000;
 }
-
-.mensagem-cativante{
-	text-shadow: 1px 1px 0px #FFFFFF;
-}
-
 .b-cadastro:hover{
 	transition: 0.15s;
 	cursor: pointer;
 	background-color: #B08A9B;
 	box-shadow: 0px 0px 2px #000000;
 }
-
 .b-cadastro:active{
 	background-color: #834661;
+}
+
+.mensagem-cativante{
+	text-shadow: 1px 1px 0px #FFFFFF;
 }
 
 
@@ -195,17 +189,16 @@ a:active{
 
 .table-cadastro input{
 	width: calc(100% - 24px);
-	height: 62px;
-	font-size: 32;
-	margin-top: 15px;
-	margin-bottom: 8px;
+	height: 56px;
+	font-size: 28;
+	margin-top: 7px;
+	margin-bottom: 4px;
 	outline: none;
 	border: solid 0px;
 	border-radius: 0px;
 	transition: 0.2s;
 	transition-property: border-bottom;
 }
-
 .table-cadastro input::placeholder{
 	bottom: 6%;
 	z-index: 2;
@@ -215,12 +208,10 @@ a:active{
 	transition: 0.2s;
 	transition-property: bottom;
 }
-
 .table-cadastro input:focus{
 	transition: 0.2s;
 	border-bottom: solid 3px;
 }
-
 .table-cadastro input:focus::placeholder{
 	transition: 0.2s;
 	bottom: 80%;
@@ -241,11 +232,9 @@ a:active{
 	color: white;
 	box-shadow: 1px 1px 3px #000000;
 }
-
 .table-cadastro button:hover{
 	background-color: #bf5151;
 }
-
 .table-cadastro button:active{
 	background-color: #853f3f;
 }
@@ -259,7 +248,214 @@ a:active{
 .erro-cadastro{
 	border: solid red 1px !important;
 }
-
 .erro-cadastro::placeholder{
 	color: red;
 }
+
+
+
+/*PAGINA DE USUARIO*/
+.div-ubloco{
+	background-color: #FFF7F7;
+	position: relative;
+	top: 5%;
+	height: 160px;
+	width: 65%;
+	margin: 0 auto;
+	border-radius: 20px;
+	box-shadow: 0px 0px 3px black;
+}
+
+.div-ubloco table{
+	width: 100%;
+	height: 100%;
+}
+
+.fit-img{
+	width: 145px;
+	height: 145px;
+	position: relative;
+	left: 5%;
+}
+
+.informacoes-cinza{
+	color: gray;
+}
+
+.informacoes{
+	color: black;
+	font-size: 30px;
+}
+
+.info{
+	color: black;
+	font-size: 20px;
+}
+
+.info-cartao{
+	color: blue;
+	font-size: 25px;
+}
+
+.info-cartao:hover{
+	border-bottom: solid 1px blue;
+	cursor: pointer;
+}
+
+.botao-sair{
+	color: red;
+	position: relative;
+	right: 5%;
+	float: right;
+	height: 15px;
+}
+
+.botao-sair:hover{
+	border-bottom: solid 1px red;
+	cursor: pointer;
+}
+
+.dados-pessoais{
+	position: relative;
+	top: 11%;
+	left: 18%;
+	font-size: 20px;
+}
+
+.cartoes-cadastrados{
+	position: relative;
+	top: 11%;
+	left: 42%;
+	font-size: 20px;
+}
+
+.div-cartoes{
+	background-color: #FFF7F7;
+	position: relative;
+	top: 12%;
+	height: 160px;
+	width: 65%;
+	margin: 0 auto;
+	border-radius: 20px;
+	box-shadow: 0px 0px 3px black;
+}
+
+.div-cartoes table{
+	width: 100%;
+	min-height: 100%;
+}
+
+.botao-mudarS{
+	position: relative;
+	left: 2%;
+	color: red;
+}
+.botao-mudarS:hover{
+	border-bottom: solid 1px red;
+	cursor: pointer;
+}
+
+.div-overlay{
+	display: none;
+	position: fixed;
+	z-index: 50;
+	background-color: rgba(0,0,0,0.5);
+	height: 100%;
+	width: 100%;
+}
+
+.div-mudar-senha{
+	background-color: #FFF7F7;
+	position: relative;
+	top: 37%;
+	width: 32%;
+	margin: 0 auto;
+	border-radius: 20px;
+	box-shadow: 0px 0px 3px black;
+}
+.alturaJDeletar{
+	height: 200px;
+}
+
+.alturaJMudar{
+	height: 250px;
+}
+
+.alturaJCartao{
+	height: 300px;
+}
+
+.div-mudar-senha table{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+.div-mudar-senha input{
+	background-color: inherit;
+	border: none;
+	border-bottom: solid 2px black;
+	border-radius: 0px;
+	outline: none;
+	font-size: 20px;
+}
+.div-mudar-senha input::placeholder{
+	position: relative;
+	right: 0%;
+	transition-property: right;
+	transition: 0.3s;
+}
+.div-mudar-senha input:focus::placeholder{
+	right: 105%;
+}
+
+.input-janela-erro{
+	border-bottom: solid 2px red !important;
+}
+
+.input-janela-erro::placeholder{
+	color: red;
+}
+
+.fechar-janela{
+	height: 25px;
+}
+
+.fechar-janela img{
+	position: relative;
+	left: 45%;
+	top: 40%;
+	height: 20px;
+	width: 20px;
+	border-radius: 20px;
+	transition: 0.2s;
+	transition-property: background-color;
+}
+.fechar-janela img:hover{
+	cursor: pointer;
+	background-color: #AFAAAA;
+}
+
+.erro-janela{
+	height: 30px;
+	font-size: 18px;
+	color: red;
+}
+
+.b-janela{
+	height: 25px;
+	font-size: 15px;
+	border: solid 1px black;
+	border-radius: 0px;
+	outline: none;
+	background-color: #F2E6E6;
+	transition: 0.1s;
+	transition-property: background-color;
+}
+
+.b-janela:hover{
+	cursor: pointer;
+	background-color: #D8D2D2;
+}
+
+

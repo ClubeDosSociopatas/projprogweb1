@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../css/estilo.css">
+		
+		<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+		<script type="text/javascript" src="../js/funcoes.js"></script>
+
+	</head>
+
+	<body>
+		<div class="div-overlay" id="dOverlay">
+		</div>
+
+		<div class="div-geral">
+			<div class="div-texto-topo"> 
+				<h2 class="texto-topo-pagina"> Somos o Processo para seu Resultado! </h2>
+			</div>
+
+			<div class="div-titulo-inicial">
+				<table class="tabela-titulo-inicial">
+					<tr>
+						<td class="tr-tamanho"><div class="div-logo">
+								<img src="../img/logo.png" id="bRediPagPrincipal">
+							</div></td>
+						<td></td>
+						<td class="tr-tamanho"><div>
+								<button class="b-menu-opcoes"> Menu de Opções </button>
+							</div></td>
+						<td></td>
+						<td class="tr-tamanho">
+							<div id="dIcones">
+							</div></td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="div-ubloco">
+				<table>
+					<tr>
+						<td rowspan="2"><img src="../img/iconeUser.png" class="fit-img"></td>
+						<td><span class="informacoes-cinza">Nome de Usuario: </span><span class="informacoes" id="nomeUser"></span></td>
+					</tr>
+					<tr>
+						<td><span class="informacoes-cinza">Email: </span><span class="informacoes" id="emailUser"></span></td>
+						<td><span class="botao-sair" id="bDeleteConta">DELETAR CONTA</span><br><span class="botao-sair" id="bSair">SAIR</span></td>
+					</tr>
+				</table>
+			</div>
+
+			<span class="dados-pessoais">Dados Pessoais:</span>
+			<span class="cartoes-cadastrados">Cartoes cadastrados: </span>
+			<div class="div-cartoes">
+				<table>
+					<tr>
+						<td><span class="informacoes-cinza">Data de nascimento: </span><span class="informacoes" id="dataUser"></span></td>
+						<td><span class="info">1. <span class="info-cartao" id="tCartaoCadastrado1"></span></span></td>
+					</tr>
+					<tr>
+						<td><span class="informacoes-cinza">Estado: </span><span class="informacoes" id="estadoUser"></span></td>
+						<td><span class="info">2. <span class="info-cartao" id="tCartaoCadastrado2"></span></span></td>
+					</tr>
+					<tr>
+						<td><span class="informacoes-cinza">Senha: </span><span class="informacoes" id="senhaUser"></span><span class="botao-mudarS" id="bMudarSenha">Mudar</span></td>
+						<td><span class="info">3. <span class="info-cartao" id="tCartaoCadastrado3"></span></span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
