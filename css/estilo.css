@@ -1,5 +1,6 @@
 body{
 	margin: 0px;
+<<<<<<< HEAD
 	background-color: white;
 	color: rgba(1, 1, 0, 0.7);
 }
@@ -174,4 +175,268 @@ input{
 	margin-left:100px;
 	margin-bottom: 50px;
 	padding: 5px;
+=======
+	background-color: #FFE6E6;
+	font-family: Helvetica;
+}
+
+a{
+	color: #21B6FF;
+	cursor: pointer;
+}
+
+a:hover{
+	color: #CC1A1A;
+	border-bottom: solid 1px #CC1A1A;
+}
+
+a:active{
+	color: #177FB2;
+	border-bottom: solid 1px #177FB2;
+}
+
+
+
+/*PRIMEIRO SEGMENTO*/
+.div-geral{
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+}
+
+.div-texto-topo{
+	position: relative;
+	z-index: 10;
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	background-color: #000000;
+	color: white;
+	box-shadow: 0px 0px 7px #000000;
+}
+
+.texto-topo-pagina{
+	position: relative;
+	top: 6px;
+	height: 100%;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.centralizar-texto{
+	text-align: center;
+}
+
+.div-titulo-inicial{
+	position: relative;
+	z-index: 9;
+	height: 120px;
+	width: 100%;
+	background-color: #AB183D;
+	box-shadow: 0px 0px 7px #000000;
+}
+
+.tabela-titulo-inicial{
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+
+.tr-tamanho{
+	width: 20%;
+}
+
+.tr-tamanho img{
+	height: 120px;
+	cursor: pointer;
+}
+
+.b-icones{
+	height: 35px;
+	background-color: transparent;
+	color: transparent;
+	outline: none;
+	border: none;
+	transition: 0.1s;
+	transition-property: height;
+	position: relative;
+}
+
+.b-icones img{
+	height: 100%;
+}
+
+.b-icones:hover{
+	height: 42px;
+	cursor: pointer;
+}
+
+.div-logo{
+	height: 100%;
+	width: 100%;
+}
+
+.b-menu-opcoes{
+	height: 100%;
+	width: 100%;
+	background-color: #AB183D;
+	border-radius: 20px;
+	border: none;
+	font-size: 32;
+	cursor: pointer;
+	outline: none;
+}
+
+.b-menu-opcoes:hover{
+	position: relative;
+	position: 2;
+	background-color: #d43c53;
+	box-shadow: 0px 0px 8px #d43c53;
+}
+
+.b-menu-opcoes:active{
+	background-color: #C15872;
+}
+
+.div-meio-pagina{
+	width: 100%;
+	height: 500px;
+}
+
+.div-meio-pagina table{
+	height: 100%;
+	width: 100%;
+}
+
+.b-cadastro{
+	z-index: 2;
+	position: relative;
+	background-color: #A4587A;
+	border-radius: 0px;
+	border: none;
+	font-size: 25px;
+	padding: 10px;
+	outline: none;
+	box-shadow: 0px 0px 1px #000000;
+}
+
+.mensagem-cativante{
+	text-shadow: 1px 1px 0px #FFFFFF;
+}
+
+.b-cadastro:hover{
+	transition: 0.15s;
+	cursor: pointer;
+	background-color: #B08A9B;
+	box-shadow: 0px 0px 2px #000000;
+}
+
+.b-cadastro:active{
+	background-color: #834661;
+}
+
+
+
+/*TELA DE LOGIN-CADASTRO*/
+.div-cadastro{
+	top: 6%;
+	width: 480px;
+	height: 500px;
+	position: relative;
+	background-color: pink;
+	border: solid 1px;
+	border-radius: none;
+	box-shadow: 1px 1px 2px #000000;
+	margin: auto;
+}
+
+.div-login{
+	top: 14%;
+	width: 480px;
+	height: 325px;
+	position: relative;
+	background-color: pink;
+	border: solid 1px;
+	border-radius: none;
+	box-shadow: 1px 1px 2px #000000;
+	margin: auto;
+}
+
+.table-cadastro{
+	width: 100%;
+	margin: 12px;
+}
+
+.table-cadastro input{
+	width: calc(100% - 24px);
+	height: 62px;
+	font-size: 32;
+	margin-top: 15px;
+	margin-bottom: 8px;
+	outline: none;
+	border: solid 0px;
+	border-radius: 0px;
+	transition: 0.2s;
+	transition-property: border-bottom;
+}
+
+.table-cadastro input::placeholder{
+	bottom: 6%;
+	z-index: 2;
+	position: relative;
+	font-size: 20;
+	padding: 10px;
+	transition: 0.2s;
+	transition-property: bottom;
+}
+
+.table-cadastro input:focus{
+	transition: 0.2s;
+	border-bottom: solid 3px;
+}
+
+.table-cadastro input:focus::placeholder{
+	transition: 0.2s;
+	bottom: 80%;
+	border-bottom: solid 3px;
+	border: none;
+}
+
+.table-cadastro button{
+	width: calc(100% - 24px);
+	height: 62px;
+	font-size: 45;
+	border: none;
+	border-radius: 0px;
+	outline: none;
+	cursor: pointer;
+	margin-top: 22px;
+	background-color: #a94646;
+	color: white;
+	box-shadow: 1px 1px 3px #000000;
+}
+
+.table-cadastro button:hover{
+	background-color: #bf5151;
+}
+
+.table-cadastro button:active{
+	background-color: #853f3f;
+}
+
+.alinhar-texto-direita{
+	text-align: center;
+	color: red;
+	font-size: 14px;
+}
+
+.erro-cadastro{
+	border: solid red 1px !important;
+}
+
+.erro-cadastro::placeholder{
+	color: red;
+>>>>>>> 470db7d04b87fe6c087260aca348231e70490c7f
 }
