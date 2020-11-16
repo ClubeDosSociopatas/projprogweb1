@@ -234,7 +234,7 @@ function funcaoClique(){
 	$("#bCadastro").click(function(){
 		var form = ["#iNome", "#iMail", "#iData", "#iEstado", "#iSenha", "#iConSenha"]
 
-		for(var cont = 0; cont < 5; cont++){
+		for(var cont = 0; cont < form.length; cont++){
 			$(form[cont]).removeClass("erro-cadastro");
 		}
 		$("#textoErro").html("");
@@ -246,7 +246,7 @@ function funcaoClique(){
 			aux.push($(form[cont]).val());
 		}
 
-		for(var cont = 0; cont < 6; cont++){
+		for(var cont = 0; cont < form.length; cont++){
 			if(aux[cont] == ""){
 				testeCadastro = false;
 				$(form[cont]).addClass("erro-cadastro");
