@@ -1,34 +1,4 @@
-<<<<<<< HEAD
-var globalOpinioes = []; //criação de array
-
-$(document).ready(function(){
-	
-	fLocalEventosClickOpinioes();
-
-});
-
-function fLocalEventosClickOpinioes(){
-	
-	$("#bAddDepoimento").click(function(){
-		var descOpinioes = $("#tDepoimento").val();
-		globalOpinioes.push(descOpinioes);
-		mostraLista();
-		
-	});
-}
-
-function mostraLista(){
-	
-	$("#lOpinioes").html("");
-	for(var i = 0; i < globalOpinioes.length; i++){
-		$("#lOpinioes").append((i+1) + ": " + globalOpinioes[i] + "<br>");
-	}
-}
-
-	
-=======
 ls = window.localStorage;
-url = window.location.href;
 
 //Itens localStorage//
 var contas = JSON.parse(ls.getItem("contas"));
@@ -45,11 +15,22 @@ if(user != null && (testePag == "cadastro.html" || testePag == "login.html")){
 	window.location.href = "../index.html";
 }
 
+var globalOpinioes = []; //criação de array
 
 $(document).ready(function(){
 	prepararPagina();
 	funcaoClique();
 });
+
+
+
+function mostraLista(){
+	
+	$("#lOpinioes").html("");
+	for(var i = 0; i < globalOpinioes.length; i++){
+		$("#lOpinioes").append((i+1) + ": " + globalOpinioes[i] + "<br>");
+	}
+}
 
 
 function prepararPagina(){
@@ -98,7 +79,13 @@ function funcaoClique(){
 			window.location.href = "../index.html";
 		}
 	});
-
+	//EVENTO OPNIOES//
+	$("#bAddDepoimento").click(function(){
+		var descOpinioes = $("#tDepoimento").val();
+		globalOpinioes.push(descOpinioes);
+		mostraLista();
+		
+	});
 
 
 	//FUNCOES CADASTRO-LOGIN//
@@ -191,4 +178,3 @@ function funcaoClique(){
 
 
 }
->>>>>>> 470db7d04b87fe6c087260aca348231e70490c7f
