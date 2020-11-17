@@ -1,5 +1,4 @@
 ls = window.localStorage;
-url = window.location.href;
 
 //Itens localStorage//
 var contas = JSON.parse(ls.getItem("contas"));
@@ -24,6 +23,7 @@ if(user == null && (testePag == "usuario.html")){
 	window.location.href = "../index.html";
 }
 
+var globalOpinioes = []; //criação de array
 
 $(document).ready(function(){
 	prepararPagina();
@@ -50,6 +50,17 @@ function prepararUsuario(){
 		else{
 			$(cardTest).html((cartoes[user][cont][1].slice(0,4) + "-****".repeat(3)));
 		}
+	}
+}
+
+
+
+//MOSTRAR OPNIOES//
+function mostraLista(){
+	
+	$("#lOpinioes").html("");
+	for(var i = 0; i < globalOpinioes.length; i++){
+		$("#lOpinioes").append((i+1) + ": " + globalOpinioes[i] + "<br>");
 	}
 }
 
@@ -225,14 +236,21 @@ function funcaoClique(){
 		}
 	});
 	$("#bUser").click(function(){
-		window.location.href = "paginas/usuario.html"
+		window.location.href = "paginas/usuario.html";
 	});
 
+	//EVENTO OPNIOES//
+	$("#bAddDepoimento").click(function(){
+		var descOpinioes = $("#tDepoimento").val();
+		globalOpinioes.push(descOpinioes);
+		mostraLista();
+		
+	});
 
 
 	//FUNCOES CADASTRO-LOGIN//
 	$("#bCadastro").click(function(){
-		var form = ["#iNome", "#iMail", "#iData", "#iEstado", "#iSenha", "#iConSenha"]
+		var form = ["#iNome", "#iMail", "#iData", "#iEstado", "#iSenha", "#iConSenha"];
 
 		for(var cont = 0; cont < form.length; cont++){
 			$(form[cont]).removeClass("erro-cadastro");
@@ -471,3 +489,4 @@ function funcaoClique(){
 		});
 	});
 }
+
