@@ -231,8 +231,7 @@ function prepararPagina(){
 			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
 		}
 		else if(testePag == "maisopcoes.html"){
-			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
-			$("#dIcones").append('<button class="b-icones" id="bRediLogin"><img src="../img/iconeLogin.png"></button>');
+			$("#dIcones").html('<button class="b-icones" id="bRediLogin"><img src="../img/iconeLogin.png"></button>');
 		}
 		else{
 			$("#fraseCati").html("Busque o seu Físico Perfeito,<br>Junte-se a Nós!");
