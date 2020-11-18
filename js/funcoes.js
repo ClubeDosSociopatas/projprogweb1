@@ -1,17 +1,31 @@
 ls = window.localStorage;
 
-//Itens localStorage//
+//     ITENS LOCALSTORAGE     //
+//Itens compraveis e Carrinho//
+var itens = [["Bola de peso 4/6kgs", "bolas.png", 34.99, false],
+			 ["Elastico para treino", "elastico.png", 22.99, false],
+			 ["Bicicleta ergométrica Estática", "bicicleta.png", 129.99, false]];
+
+var car = JSON.parse(ls.getItem("carrinho"));
+if(car == null){
+	car = [];
+}
+
+//Variaveis usuario e cadastros//
 var contas = JSON.parse(ls.getItem("contas"));
 if(contas == null){
 	contas = [];
 }
 var user = JSON.parse(ls.getItem("user"));
-
-var car = parseInt(JSON.parse(ls.getItem("carrinho")));
-
 var cartoes = JSON.parse(ls.getItem("cartoes"));
 if(cartoes == null){
 	cartoes = [];
+}
+
+if(user != null){
+	for(var cont = 0; cont < car[user].length; cont++){
+	itens[car[user][cont]].splice(3, 1, true);
+	}
 }
 
 //Teste usuario logado//
@@ -19,7 +33,7 @@ var testePag = window.location.href.slice(window.location.href.lastIndexOf("/")+
 if(user != null && (testePag == "cadastro.html" || testePag == "login.html")){
 	window.location.href = "../index.html";
 }
-if(user == null && (testePag == "usuario.html")){
+if(user == null && (testePag == "usuario.html" || testePag == "carrinho.html")){
 	window.location.href = "../index.html";
 }
 
@@ -30,8 +44,103 @@ $(document).ready(function(){
 	if(testePag == "usuario.html"){
 		prepararUsuario();
 	}
+	if(testePag == "carrinho.html"){
+		prepararCarrinho();
+	}
 	funcaoClique();
 });
+//FUNC CALCULAR JUROS//
+function calcularJuros(numP, numF){
+	var tJuros = parseInt($("#sJuros").val());
+	if(parseFloat(numP) == 0.0){
+		$(".fonte-preco").html('Total: &emsp; R$ '+numP);
+		return;
+	}
+	if(tJuros == 0){
+		numP = parseFloat(numP) + parseFloat(numF);
+		$(".fonte-preco").html('Total: &emsp; R$ '+numP.toFixed(2));
+		return;
+	}
+	if(tJuros == 1){
+		numP = parseFloat(numP) + parseFloat(numF);
+		numP = parseFloat(numP/2).toFixed(2);
+		$(".fonte-preco").html('Total: &emsp; 2xR$ '+numP);
+		return;
+	}
+	if(tJuros == 2){
+		numP = parseFloat(numP) + parseFloat(numF);
+		numP = parseFloat(numP/4).toFixed(2);
+		$(".fonte-preco").html('Total: &emsp; 4xR$ '+numP);
+		return;
+	}
+	if(tJuros == 3){
+		var numeral = parseFloat(numP) + parseFloat(numP*0.08) + parseFloat(numF);
+		numeral = parseFloat(numeral/6).toFixed(2);
+		$(".fonte-preco").html('Total: &emsp; 6xR$ '+numeral);
+		return;
+	}
+	if(tJuros == 4){
+		var numeral = parseFloat(numP) + parseFloat(numP*0.14) + parseFloat(numF);
+		numeral = parseFloat(numeral/8).toFixed(2);
+		$(".fonte-preco").html('Total: &emsp; 8xR$ '+numeral);
+		return;
+	}
+}
+//FUNC CALCULAR PRECO//
+function calcPreco(){
+	var precoCalculo = 0;
+	for(var cont = 0; cont < car[user].length; cont++){
+		precoCalculo+= itens[car[user][cont]][2] * $("#quant"+cont+"").val();
+	}
+	return precoCalculo;
+}
+//PRPARAR PAGINA CARRINHO//
+function prepararCarrinho(){
+	$(".div-main-carrinho").html("");
+	$('.div-main-carrinho').css('height', ''+(300+(car[user].length*200))+'px');
+	for(var cont = 0; cont < car[user].length; cont++){
+		var juncao = '<div class="div-espaco-produto">';
+		juncao+=	 '<div class="div-dentro"><table><tr>';
+		juncao+=	 '<td><img src="../img/'+itens[car[user][cont]][1]+'"><b class="div-produto-nome">'+itens[car[user][cont]][0]+'</b><b class="botao-remover" id_car="'+cont+'">Remover</b></td>';
+		juncao+=	 '<td class="alinha-produto-direita"><input type="text" placeholder="Qt" value="1" maxlength="2" size="2" id="quant'+cont+'" class="quantidadeProduto" id_car="'+cont+'"><b class="div-preco" id="preco'+cont+'">R$ '+itens[car[user][cont]][2]+'</b></td>';
+		juncao+=	 '</tr></table></div></div>';
+		juncao+=	 '<div class="linha-separador"></div>';
+		$(".div-main-carrinho").append(juncao);
+	}
+	var preco = parseFloat(calcPreco());
+	var frete = parseFloat(((preco*0.12)+9.00).toFixed(2));
+	var precoFinal = (preco+frete).toFixed(2);
+
+	var juncao = '';
+	if(preco == 0.0){
+		juncao+= '<div class="espacamento-preco"><b class="fonte-frete">Frete: &emsp; R$ '+0+'</b><br><b class="fonte-preco">Total: &emsp; R$ '+0+'</b></div>';
+	}
+	else{
+		juncao+= '<div class="espacamento-preco"><b class="fonte-frete">Frete: &emsp; R$ '+frete+'</b><br><b class="fonte-preco">Total: &emsp; R$ '+precoFinal+'</b></div>';
+	}
+	juncao+=	 '<div class="linha-separador"></div>';
+	juncao+=     '<div class="espacamento-final"><table><tr><td>';
+	if(cartoes[user][0][0] == null && cartoes[user][1][0] == null && cartoes[user][2][0] == null){
+		juncao+= '<span class="info"><span class="info-cartao" id="tCartaoCadastrado0">Cadastrar Cartão</span></span>';
+	}
+	else{
+		juncao+= '<select id="sCartao" class="compra-juros">';
+		for(var cont = 0; cont < cartoes[user].length; cont++){
+			if(cartoes[user][cont][0] != null){
+				juncao+=	 '<option value="'+cont+'">Cartão '+(cartoes[user][cont][1].slice(0,4) + "-****".repeat(3))+'</option>';
+			}
+		}
+		juncao+= '</select></td>';
+	}
+	juncao+=	 '<td rowspan="2"><button class="botao-efetuar-compra" id="bEfetuarCompra">Efetuar compra</button></td>';
+	juncao+=	 '</tr><tr><td><select id="sJuros" class="compra-juros">';
+	juncao+=	 '<option value="0">À Vista</option>'
+	juncao+=	 '<option value="1">2x (Sem Juros)</option>';
+	juncao+=	 '<option value="2">4x (Sem Juros)</option>';
+	juncao+=	 '<option value="3">6x (Juros de 8%)</option>';
+	juncao+=	 '<option value="4">8x (Juros de 14%)</option></select></td></tr></table></div>';
+	$(".div-main-carrinho").append(juncao);
+}
 
 
 
@@ -69,16 +178,34 @@ function mostraLista(){
 //PREPARAR PAGINAS//
 function prepararPagina(){
 	if(user != null){
+		$("#dProdutoIndex").html("");
+		for(var cont = 0; cont < 3; cont++){
+			var juncao = '<div class="div-fotos-produtos">';
+			juncao+=	 '<div class="container-img"><img src="img/'+itens[cont][1]+'">';
+			juncao+=	 '<div class="containerText1">'+itens[cont][0]+'</div>';
+			juncao+=	 '<div class="containerText2">R$'+itens[cont][2]+'</div></div>';
+			if(!(itens[cont][3])){
+				juncao+= '<button class="botao-add-carrinho" id_item="'+cont+'">Comprar</button></div>';
+			}
+			else{
+				juncao+= '<button class="botao-comprado">No Carrinho!</button></div>';
+			}
+			$("#dProdutoIndex").append(juncao);
+		}
 		usu = parseInt(user);
 		var capt = contas[usu][0].charAt(0).toUpperCase() + contas[usu][0].slice(1);
 		if(testePag == "usuario.html"){
 			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
-			$("#dIcones").append('<button class="b-icones"><img src="../img/iconeCarrinho.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bRediCarrinho"><img src="../img/iconeCarrinho.png"></button>');
+		}
+		else if(testePag == "carrinho.html"){
+			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bUser"><img src="../img/iconePessoa.png"></button>');
 		}
 		else{
 			$("#meioPagIndex").html('<h1 class="mensagem-cativante">Seja bem vindo,<br>'+ capt +'!</h1>');
 			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="img/iconeBusca.png"></button>');
-			$("#dIcones").append('<button class="b-icones"><img src="img/iconeCarrinho.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bRediCarrinho"><img src="img/iconeCarrinho.png"></button>');
 			$("#dIcones").append('<button class="b-icones" id="bUser"><img src="img/iconePessoa.png"></button>');
 		}
 	}
@@ -164,7 +291,11 @@ function cadastrarCartao(num){
 		if(testeCartao){
 			cartoes[user][num] = aux;
 			ls.setItem("cartoes", JSON.stringify(cartoes));
-			window.location.href = "usuario.html";
+			prepararUsuario();
+			prepararCarrinho();
+			funcaoClique();
+			$("#dOverlay").hide();
+			$("#dOverlay").html();
 		}
 	});
 }
@@ -231,13 +362,28 @@ function funcaoClique(){
 		}
 	});
 	$("#bRediPagPrincipal").click(function(){
-		if(testePag == "cadastro.html" || testePag == "login.html" || testePag == "usuario.html"){
+		if(testePag != "index.html"){
 			window.location.href = "../index.html";
 		}
 	});
 	$("#bUser").click(function(){
-		window.location.href = "paginas/usuario.html";
+		if(testePag == "index.html"){
+			window.location.href = "paginas/usuario.html";
+		}
+		else{
+			window.location.href = "usuario.html";
+		}
 	});
+	$("#bRediCarrinho").click(function(){
+		if(testePag == "index.html"){
+			window.location.href = "paginas/carrinho.html";
+		}
+		else{
+			window.location.href = "carrinho.html";
+		}
+	});
+
+
 
 	//EVENTO OPNIOES//
 	$("#bAddDepoimento").click(function(){
@@ -246,6 +392,7 @@ function funcaoClique(){
 		mostraLista();
 		
 	});
+
 
 
 	//FUNCOES CADASTRO-LOGIN//
@@ -301,9 +448,11 @@ function funcaoClique(){
 			aux.splice(5);
 			contas.push(aux);
 			cartoes.push([[null,null,null,null],[null,null,null,null],[null,null,null,null]]);
+			car.push([]);
 			ls.setItem("contas", JSON.stringify(contas));
 			ls.setItem("user", JSON.stringify(contas.length-1));
 			ls.setItem("cartoes", JSON.stringify(cartoes));
+			ls.setItem("carrinho", JSON.stringify(car));
 			window.location.href = "../index.html";
 		}
 	});
@@ -377,6 +526,9 @@ function funcaoClique(){
 			cadastrarCartao(2)
 		}
 	});
+
+
+
 	//CONFIRMAR DELETAR CONTA//
 	$("#bDeleteConta").click(function(){
 		var juncao = '<div class="div-mudar-senha" id="dCampoJanela">';
@@ -402,12 +554,17 @@ function funcaoClique(){
 		$("#bSIM").click(function(){
 			contas.splice(user, 1);
 			cartoes.splice(user, 1);
+			car.splice(user, 1);
 			ls.setItem("cartoes", JSON.stringify(cartoes));
 			ls.setItem("contas", JSON.stringify(contas));
+			ls.setItem("carrinho", JSON.stringify(car));
 			ls.setItem("user", null);
 			window.location.href = "../index.html";
 		});
 	});
+
+
+
 	//JANELA MUDAR SENHA//
 	$("#bMudarSenha").click(function(){
 		var juncao = '<div class="div-mudar-senha" id="dCampoJanela">';
@@ -488,5 +645,45 @@ function funcaoClique(){
 			}
 		});
 	});
+
+
+
+	//FUNCOES CARRINHO//
+	$(".botao-add-carrinho").click(function(){
+
+		var id = $(this).attr("id_item");
+
+		itens[id].splice(3, 1, true);
+		car[user].push(id);
+		prepararPagina();
+		ls.setItem("carrinho", JSON.stringify(car));
+		funcaoClique();
+	});
+
+	$(".quantidadeProduto").on('input', function(){
+		var id = $(this).attr("id_car");
+
+		var preco = parseFloat(calcPreco());
+		var frete = parseFloat(((preco*0.12)+9.00).toFixed(2));
+
+		$("#preco"+id).html("R$ "+(itens[car[user][id]][2] * $(this).val()).toFixed(2));
+		$(".fonte-frete").html('Frete: &emsp; R$ '+frete);
+		calcularJuros(preco, frete);
+	});
+
+	$(".botao-remover").click(function(){
+		var id = $(this).attr("id_car");
+		car[user].splice(id, 1);
+		ls.setItem("carrinho", JSON.stringify(car));
+		window.location.href = "carrinho.html";
+	});
+
+	$("#sJuros").on('input', function(){
+		var preco = parseFloat(calcPreco());
+		var frete = parseFloat(((preco*0.12)+9.00).toFixed(2));
+
+		calcularJuros(preco, frete);
+	});
+
 }
 
