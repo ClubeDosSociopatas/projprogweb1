@@ -158,6 +158,8 @@ a:active{
 	border-radius: 3px;
 	padding: 3px;
 	outline: none;
+	position: relative;
+	z-index: 40;
 }
 
 .botao-opcoes:hover{
@@ -356,24 +358,19 @@ a:active{
 	width: 100%;
 }
 
-.b-menu-opcoes{
+.b-nome-empresa{
 	height: 100%;
 	width: 100%;
 	background-color: #AB183D;
 	border-radius: 20px;
 	border: none;
 	font-size: 32;
-	cursor: pointer;
 	outline: none;
+	transition: 0.3s;
+	transition-property: text-shadow;
 }
-.b-menu-opcoes:hover{
-	position: relative;
-	position: 2;
-	background-color: #d43c53;
-	box-shadow: 0px 0px 8px #d43c53;
-}
-.b-menu-opcoes:active{
-	background-color: #C15872;
+.b-nome-empresa:hover{
+	text-shadow: 0px 0px 6px #d43c53;
 }
 
 .div-meio-pagina{

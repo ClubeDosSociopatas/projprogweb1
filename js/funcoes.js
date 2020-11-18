@@ -210,19 +210,32 @@ function prepararPagina(){
 
 //PREPARAR PAGINA DE PRODUTOS//
 function prepararProdutos(){
-	$(".Produtos-base").html("");
-	for(var cont = 0; cont < itens.length; cont++){
-		var juncao = '<div class="div-card-produto">';
-		juncao+=	 '<div class="container-img"><img src="../img/'+itens[cont][1]+'">';
-		juncao+=	 '<div class="containerText1">'+itens[cont][0]+'</div>';
-		juncao+=	 '<div class="containerText2">R$'+itens[cont][2]+'</div></div>';
-		if(!(itens[cont][3])){
-			juncao+= '<button class="botao-add-carrinho" id_item="'+cont+'">Comprar</button></div>';
+	if(user != null){
+		$(".Produtos-base").html("");
+		for(var cont = 0; cont < itens.length; cont++){
+			var juncao = '<div class="div-card-produto">';
+			juncao+=	 '<div class="container-img"><img src="../img/'+itens[cont][1]+'">';
+			juncao+=	 '<div class="containerText1">'+itens[cont][0]+'</div>';
+			juncao+=	 '<div class="containerText2">R$'+itens[cont][2]+'</div></div>';
+			if(!(itens[cont][3])){
+				juncao+= '<button class="botao-add-carrinho" id_item="'+cont+'">Comprar</button></div>';
+			}
+			else{
+				juncao+= '<button class="botao-comprado">No Carrinho!</button></div>';
+			}
+			$(".Produtos-base").append(juncao);
 		}
-		else{
-			juncao+= '<button class="botao-comprado">No Carrinho!</button></div>';
+	}
+	else{
+		$(".Produtos-base").html("");
+		for(var cont = 0; cont < itens.length; cont++){
+			var juncao = '<div class="div-card-produto">';
+			juncao+=	 '<div class="container-img"><img src="../img/'+itens[cont][1]+'">';
+			juncao+=	 '<div class="containerText1">'+itens[cont][0]+'</div>';
+			juncao+=	 '<div class="containerText2">R$'+itens[cont][2]+'</div></div>';
+			$(".Produtos-base").append(juncao);
 		}
-		$(".Produtos-base").append(juncao);
+		$(".div-card-produto").css("height", "150px");
 	}
 }
 
