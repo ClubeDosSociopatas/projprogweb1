@@ -772,6 +772,16 @@ a:active{
 .botao-efetuar-compra:active{
 	background-color: #873838;
 }
+.botao-efetuado{
+	outline: none;
+	height: 50px;
+	font-size: 15px;
+	width: 160px;
+	border: 0px;
+	border-radius: 2px;
+	color: white;
+	background-color: #6EA561;
+}
 
 .espacamento-preco b{
 	position: relative;
@@ -883,3 +893,30 @@ a:active{
 	color: #b63b3b;
 }
 .quantidade-Produto{}
+
+/*PAGINA MAIS OPCOES*/
+.produtos-fundo{
+	position: fixed;
+	background-color: #fff7f7;
+	height: 100%;
+	width: 70%;
+	z-index: -1;
+	left: 15%;
+}
+
+.produtos-base{
+	height: 60%;
+	width: 70%;
+	margin: 0 auto;
+}
+
+.div-card-produto{
+	float: left;
+	text-align: center;
+	justify-content: center;
+	width: 150px;
+	height: 200px;
+	background-color: #CCC;
+	margin: 12px;
+	padding: 5px;
+}

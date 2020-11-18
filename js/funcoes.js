@@ -1,10 +1,26 @@
 ls = window.localStorage;
 
-//     ITENS LOCALSTORAGE     //
 //Itens compraveis e Carrinho//
 var itens = [["Bola de peso 4/6kgs", "bolas.png", 34.99, false],
 			 ["Elastico para treino", "elastico.png", 22.99, false],
-			 ["Bicicleta ergométrica Estática", "bicicleta.png", 129.99, false]];
+			 ["Bicicleta Estática", "bicicleta.png", 129.99, false],
+			 ["Anel de Pilates", "aneldepilates.png", 30.99, false],
+			 ["Bandagem Adesiva", "bandagemadesiva.png", 12.99, false],
+			 ["Bola para yoga", "bolayoga.png", 25.99, false],
+			 ["Caneleiras 1KG", "caneleira1.png", 28.99, false],
+			 ["Caneleiras 2KG", "caneleira2.png", 36.99, false],
+			 ["Halter 1KG", "peso1.png", 19.99, false],
+			 ["Halter 3KG", "peso3.png", 28.99, false],
+			 ["Tatame Esticável", "tatamiestica.png", 39.99, false],
+			 ["Tatame Eva", "tatameeva.png", 49.99, false],
+			 ["Tatame", "tatami.png", 29.99, false],
+			 ["Suplemento colágeno tipo II", "colageno.png", 39.99, false],
+			 ["Suplemento maca peruana", "macaperuana.png", 42.99, false],
+			 ["Suplemento picolinato de cromo", "picolinato.png", 42.99, false],
+			 ["Suplemento thermo abdomen", "thermoabdomen.png", 45.99, false],
+			 ["Suplemento BCAA", "bcaa.png", 45.99, false]];
+
+//     ITENS LOCALSTORAGE     //
 
 var car = JSON.parse(ls.getItem("carrinho"));
 if(car == null){
@@ -39,6 +55,11 @@ if(user == null && (testePag == "usuario.html" || testePag == "carrinho.html")){
 
 var globalOpinioes = []; //criação de array
 
+
+
+
+
+
 $(document).ready(function(){
 	prepararPagina();
 	if(testePag == "usuario.html"){
@@ -47,8 +68,27 @@ $(document).ready(function(){
 	if(testePag == "carrinho.html"){
 		prepararCarrinho();
 	}
+	if(testePag == "maisopcoes.html"){
+		prepararProdutos();
+	}
 	funcaoClique();
 });
+
+
+
+
+
+//MOSTRAR OPNIOES//
+function mostraLista(){
+	
+	$("#lOpinioes").html("");
+	for(var i = 0; i < globalOpinioes.length; i++){
+		$("#lOpinioes").append((i+1) + ": " + globalOpinioes[i] + "<br>");
+	}
+}
+
+
+
 //FUNC CALCULAR JUROS//
 function calcularJuros(numP, numF){
 	var tJuros = parseInt($("#sJuros").val());
@@ -86,6 +126,9 @@ function calcularJuros(numP, numF){
 		return;
 	}
 }
+
+
+
 //FUNC CALCULAR PRECO//
 function calcPreco(){
 	var precoCalculo = 0;
@@ -94,6 +137,117 @@ function calcPreco(){
 	}
 	return precoCalculo;
 }
+
+
+
+//PREPARAR PAGINAS//
+function prepararPagina(){
+	if(user != null){
+		if(testePag != "maisopcoes.html"){
+			$("#dProdutoIndex").html("");
+			for(var cont = 0; cont < 3; cont++){
+				var juncao = '<div class="div-fotos-produtos">';
+				juncao+=	 '<div class="container-img"><img src="img/'+itens[cont][1]+'">';
+				juncao+=	 '<div class="containerText1">'+itens[cont][0]+'</div>';
+				juncao+=	 '<div class="containerText2">R$'+itens[cont][2]+'</div></div>';
+				if(!(itens[cont][3])){
+					juncao+= '<button class="botao-add-carrinho" id_item="'+cont+'">Comprar</button></div>';
+				}
+				else{
+					juncao+= '<button class="botao-comprado">No Carrinho!</button></div>';
+				}
+				$("#dProdutoIndex").append(juncao);
+			}
+		}
+		usu = parseInt(user);
+		var capt = contas[usu][0].charAt(0).toUpperCase() + contas[usu][0].slice(1);
+		if(testePag == "index.html"){
+			$("#meioPagIndex").html('<h1 class="mensagem-cativante">Seja bem vindo,<br>'+ capt +'!</h1>');
+			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="img/iconeBusca.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bRediCarrinho"><img src="img/iconeCarrinho.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bUser"><img src="img/iconePessoa.png"></button>');
+		}
+		else if(testePag == "usuario.html"){
+			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bRediCarrinho"><img src="../img/iconeCarrinho.png"></button>');
+		}
+		else if(testePag == "maisopcoes.html"){
+			$("#dIcones").html('<button class="b-icones" id="bRediCarrinho"><img src="../img/iconeCarrinho.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bUser"><img src="../img/iconePessoa.png"></button>');
+		}
+		else if(testePag == "carrinho.html"){
+			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bUser"><img src="../img/iconePessoa.png"></button>');
+		}
+	}
+	else{
+		$("#dProdutoIndex").html("");
+		for(var cont = 0; cont < 3; cont++){
+			var juncao = '<div class="div-fotos-produtos">';
+			juncao+=	 '<div class="container-img"><img src="img/'+itens[cont][1]+'">';
+			juncao+=	 '<div class="containerText1">'+itens[cont][0]+'</div>';
+			juncao+=	 '<div class="containerText2">R$'+itens[cont][2]+'</div></div>';
+			$("#dProdutoIndex").append(juncao);
+		}
+		$(".div-fotos-produtos").css("height", "150px");
+		if(testePag == "cadastro.html" || testePag == "login.html"){
+			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
+		}
+		else if(testePag == "maisopcoes.html"){
+			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bRediLogin"><img src="../img/iconeLogin.png"></button>');
+		}
+		else{
+			$("#fraseCati").html("Busque o seu Físico Perfeito,<br>Junte-se a Nós!");
+			$("#meioPagIndex").html('<button class="b-cadastro" id="bRediCadastro">Cadastro</button>');
+			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="img/iconeBusca.png"></button>');
+			$("#dIcones").append('<button class="b-icones" id="bRediLogin"><img src="img/iconeLogin.png"></button>');
+		}
+	}
+}
+
+
+
+//PREPARAR PAGINA DE PRODUTOS//
+function prepararProdutos(){
+	$(".Produtos-base").html("");
+	for(var cont = 0; cont < itens.length; cont++){
+		var juncao = '<div class="div-card-produto">';
+		juncao+=	 '<div class="container-img"><img src="../img/'+itens[cont][1]+'">';
+		juncao+=	 '<div class="containerText1">'+itens[cont][0]+'</div>';
+		juncao+=	 '<div class="containerText2">R$'+itens[cont][2]+'</div></div>';
+		if(!(itens[cont][3])){
+			juncao+= '<button class="botao-add-carrinho" id_item="'+cont+'">Comprar</button></div>';
+		}
+		else{
+			juncao+= '<button class="botao-comprado">No Carrinho!</button></div>';
+		}
+		$(".Produtos-base").append(juncao);
+	}
+}
+
+
+
+//PREPARAR PAGINA USER//
+function prepararUsuario(){
+	$("#nomeUser").html(contas[user][0]);
+	$("#emailUser").html(contas[user][1]);
+	$("#dataUser").html(contas[user][2]);
+	$("#estadoUser").html(contas[user][3]);
+	$("#senhaUser").html('*'.repeat(contas[user][4].length));
+	for(var cont = 0; cont < 3; cont++){
+		var cardTest = "#tCartaoCadastrado" + String(cont);
+		if(cartoes[user][cont][0] == null){
+			$(cardTest).html('Cadastrar cartão');
+		}
+		else{
+			$(cardTest).html((cartoes[user][cont][1].slice(0,4) + "-****".repeat(3)));
+		}
+	}
+}
+
+
+
 //PRPARAR PAGINA CARRINHO//
 function prepararCarrinho(){
 	$(".div-main-carrinho").html("");
@@ -132,7 +286,7 @@ function prepararCarrinho(){
 		}
 		juncao+= '</select></td>';
 	}
-	juncao+=	 '<td rowspan="2"><button class="botao-efetuar-compra" id="bEfetuarCompra">Efetuar compra</button></td>';
+	juncao+=	 '<td rowspan="2"><button class="botao-efetuar-compra" id="bEfetuarCompra">Efetuar compra</button><br><b class="erro-janela"></b></td>';
 	juncao+=	 '</tr><tr><td><select id="sJuros" class="compra-juros">';
 	juncao+=	 '<option value="0">À Vista</option>'
 	juncao+=	 '<option value="1">2x (Sem Juros)</option>';
@@ -144,86 +298,7 @@ function prepararCarrinho(){
 
 
 
-//PREPARAR PAGINA USER//
-function prepararUsuario(){
-	$("#nomeUser").html(contas[user][0]);
-	$("#emailUser").html(contas[user][1]);
-	$("#dataUser").html(contas[user][2]);
-	$("#estadoUser").html(contas[user][3]);
-	$("#senhaUser").html('*'.repeat(contas[user][4].length));
-	for(var cont = 0; cont < 3; cont++){
-		var cardTest = "#tCartaoCadastrado" + String(cont);
-		if(cartoes[user][cont][0] == null){
-			$(cardTest).html('Cadastrar cartão');
-		}
-		else{
-			$(cardTest).html((cartoes[user][cont][1].slice(0,4) + "-****".repeat(3)));
-		}
-	}
-}
-
-
-
-//MOSTRAR OPNIOES//
-function mostraLista(){
-	
-	$("#lOpinioes").html("");
-	for(var i = 0; i < globalOpinioes.length; i++){
-		$("#lOpinioes").append((i+1) + ": " + globalOpinioes[i] + "<br>");
-	}
-}
-
-
-
-//PREPARAR PAGINAS//
-function prepararPagina(){
-	if(user != null){
-		$("#dProdutoIndex").html("");
-		for(var cont = 0; cont < 3; cont++){
-			var juncao = '<div class="div-fotos-produtos">';
-			juncao+=	 '<div class="container-img"><img src="img/'+itens[cont][1]+'">';
-			juncao+=	 '<div class="containerText1">'+itens[cont][0]+'</div>';
-			juncao+=	 '<div class="containerText2">R$'+itens[cont][2]+'</div></div>';
-			if(!(itens[cont][3])){
-				juncao+= '<button class="botao-add-carrinho" id_item="'+cont+'">Comprar</button></div>';
-			}
-			else{
-				juncao+= '<button class="botao-comprado">No Carrinho!</button></div>';
-			}
-			$("#dProdutoIndex").append(juncao);
-		}
-		usu = parseInt(user);
-		var capt = contas[usu][0].charAt(0).toUpperCase() + contas[usu][0].slice(1);
-		if(testePag == "usuario.html"){
-			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
-			$("#dIcones").append('<button class="b-icones" id="bRediCarrinho"><img src="../img/iconeCarrinho.png"></button>');
-		}
-		else if(testePag == "carrinho.html"){
-			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
-			$("#dIcones").append('<button class="b-icones" id="bUser"><img src="../img/iconePessoa.png"></button>');
-		}
-		else{
-			$("#meioPagIndex").html('<h1 class="mensagem-cativante">Seja bem vindo,<br>'+ capt +'!</h1>');
-			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="img/iconeBusca.png"></button>');
-			$("#dIcones").append('<button class="b-icones" id="bRediCarrinho"><img src="img/iconeCarrinho.png"></button>');
-			$("#dIcones").append('<button class="b-icones" id="bUser"><img src="img/iconePessoa.png"></button>');
-		}
-	}
-	else{
-		if(testePag == "cadastro.html" || testePag == "login.html"){
-			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="../img/iconeBusca.png"></button>');
-		}
-		else{
-			$("#fraseCati").html("Busque o seu Físico Perfeito,<br>Junte-se a Nós!");
-			$("#meioPagIndex").html('<button class="b-cadastro" id="bRediCadastro">Cadastro</button>');
-			$("#dIcones").html('<button class="b-icones" id="bBusca"><img src="img/iconeBusca.png"></button>');
-			$("#dIcones").append('<button class="b-icones" id="bRediLogin"><img src="img/iconeLogin.png"></button>');
-		}
-	}
-}
-
-
-
+//CADASTRAR UM CARTAO//
 function cadastrarCartao(num){
 	var juncao = '<div class="div-mudar-senha alturaJCartao" id="dCampoJanela"><table>';
 	juncao+=	 '<tr>';
@@ -302,6 +377,7 @@ function cadastrarCartao(num){
 
 
 
+//PREPARAR CARTAO PARA VISUALIZACAO//
 function prepararCartoes(num){
 	var juncao = '<div class="div-mudar-senha" id="dCampoJanela"><table><tr>';
 	juncao+=	 '<td class="fechar-janela" colspan="2"><img src="../img/iconeX.png" id="bFechaJanela"></td></tr>';
@@ -354,7 +430,7 @@ function funcaoClique(){
 		}
 	});
 	$("#bRediLogin").click(function(){
-		if(testePag == "cadastro.html"){
+		if(testePag == "cadastro.html" || testePag == "maisopcoes.html"){
 			window.location.href = "login.html";
 		}
 		else{
@@ -380,6 +456,14 @@ function funcaoClique(){
 		}
 		else{
 			window.location.href = "carrinho.html";
+		}
+	});
+	$("#bBusca").click(function(){
+		if(testePag != "index.html"){
+			window.location.href = "maisopcoes.html";
+		}
+		else{
+			window.location.href = "paginas/maisopcoes.html";
 		}
 	});
 
@@ -656,6 +740,7 @@ function funcaoClique(){
 		itens[id].splice(3, 1, true);
 		car[user].push(id);
 		prepararPagina();
+		prepararProdutos();
 		ls.setItem("carrinho", JSON.stringify(car));
 		funcaoClique();
 	});
@@ -685,5 +770,29 @@ function funcaoClique(){
 		calcularJuros(preco, frete);
 	});
 
+	$("#bEfetuarCompra").click(function(){
+		$(".erro-janela").html('');
+		if(car[user].length == 0){
+			$(".erro-janela").html('CARRINHO VAZIO!');
+		}
+		else if(cartoes[user][0][0] == null && cartoes[user][1][0] == null && cartoes[user][2][0] == null){
+			$(".erro-janela").html('POR FAVOR, <br>CADASTRE UM <br>CARTÃO!');
+		}
+		else{
+			car[user].splice(0,car[user].length);
+			ls.setItem("carrinho", JSON.stringify(car));
+			prepararCarrinho();
+			$("#bEfetuarCompra").removeClass('botao-efetuar-compra');
+			$("#bEfetuarCompra").addClass('botao-efetuado');
+			$("#bEfetuarCompra").html('Compra Efetuada!');
+		}
+	});
+
+
+
+	//FUNCOES MAIS OPCOES//
+	$(".botao-opcoes").click(function(){
+		window.location.href = "paginas/maisopcoes.html";
+	});
 }
 
