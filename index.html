@@ -4,6 +4,7 @@
 		
 		<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
 		<script type="text/javascript" src="js/funcoes.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN57mkO88IXlQikM9Gp6zA2txiHgxMtJY&callback=initMap" async defer ></script>
 
 		<meta charset="UTF-8"/>
 		<title>Falcon Vision</title>
@@ -94,7 +95,21 @@
 					<p><font size="4" face="Times">"Sem os equipamentos da Falcon Vision, eu não seria o que sou hoje" ~ Leo Stronda</font></p>
 				</div>
 			</div>
-			
+
+			<div class="div-titulo">
+				<header>
+					<hgroup>
+						<h1>Onde nos encontrar</h1>
+						<h2>Nossa lojas físicas estão presentes em varios lugares, confira!</h2>
+					</hgroup>
+				</header>
+			</div>
+
+			<div class="div-mapa-base">
+				<div id="map"></div>
+			</div>
+
+
 			<div class="div-titulo">
 				<header>
 					<hgroup>
@@ -103,7 +118,7 @@
 					</hgroup>
 				</header>
 			</div>
-			
+
 			<div class="div-area">
 				<div class="div-depoimento">
 					Área para Depoimento do Cliente <br><br>
@@ -111,6 +126,7 @@
 				</div>
 				<div class="div-botao-depoimento">
 					<button class="botao-depoimento" id="bAddDepoimento">Adicionar</button>
+					<b class="erro-janela" id="erro-comentario"></b>
 				</div>
 			</div>
 			

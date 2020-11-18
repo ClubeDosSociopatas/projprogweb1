@@ -53,7 +53,10 @@ if(user == null && (testePag == "usuario.html" || testePag == "carrinho.html")){
 	window.location.href = "../index.html";
 }
 
-var globalOpinioes = []; //criação de array
+var globalOpinioes = JSON.parse(ls.getItem("opnioes"));
+if(globalOpinioes == null){
+	globalOpinioes = [];
+}
 
 
 
@@ -61,6 +64,7 @@ var globalOpinioes = []; //criação de array
 
 
 $(document).ready(function(){
+	mostraLista();
 	prepararPagina();
 	if(testePag == "usuario.html"){
 		prepararUsuario();
@@ -78,12 +82,45 @@ $(document).ready(function(){
 
 
 
+//MAPA API GOOGLE//
+var mapa;
+
+function initMap(){
+
+	var marc = [[-24.942602, -53.483532, "(Cascavel)"],
+				[-25.441864, -49.250172, "(Curitiba)"],
+				[-23.315437, -51.154936, "(Londrina)"],
+				[-16.689793, -49.269088, "(Goiânia)"],
+				[-22.891615, -43.285178, "(Rio De Janeiro)"],
+				[-8.051727, -34.910563, "(Recife)"]];
+
+	var marcador;
+
+	var configuracoes = {
+		center: {lat: -24.942602, lng: -53.483532},
+		zoom: 7
+	}
+      
+    mapa = new google.maps.Map(document.getElementById('map'), configuracoes);
+
+    for(var cont = 0; cont < marc.length; cont++){
+    	marcador = new google.maps.Marker({
+			position: {lat: marc[cont][0], lng: marc[cont][1]},
+			title: "Falcon Vision"+marc[cont][2],
+			map: mapa
+		});
+    }
+
+}
+
+
+
 //MOSTRAR OPNIOES//
 function mostraLista(){
 	
 	$("#lOpinioes").html("");
 	for(var i = 0; i < globalOpinioes.length; i++){
-		$("#lOpinioes").append((i+1) + ": " + globalOpinioes[i] + "<br>");
+		$("#lOpinioes").append(globalOpinioes[i][0] + ": " + globalOpinioes[i][1] + "<br>");
 	}
 }
 
@@ -484,10 +521,17 @@ function funcaoClique(){
 
 	//EVENTO OPNIOES//
 	$("#bAddDepoimento").click(function(){
-		var descOpinioes = $("#tDepoimento").val();
-		globalOpinioes.push(descOpinioes);
-		mostraLista();
-		
+		if(user != null){
+			var descOpinioes = $("#tDepoimento").val();
+			var aux = [contas[user][0], descOpinioes];
+			globalOpinioes.push(aux);
+			ls.setItem("opnioes", JSON.stringify(globalOpinioes));
+			mostraLista();
+			$("#tDepoimento").html('');
+		}
+		else{
+			$("#erro-comentario").html("É NECESSÁRIO ESTAR LOGADO PARA COMENTAR!");
+		}
 	});
 
 
